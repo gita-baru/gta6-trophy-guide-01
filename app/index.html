@@ -4,76 +4,67 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Leonida Platinum — GTA VI Trophy Guide</title>
+<meta name="description" content="A complete Grand Theft Auto VI trophy guide: all 55 trophies with a tracker, a roadmap to the platinum, and missables flagged.">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header class="hero">
-  <h1>Leonida <span>Platinum</span> — GTA VI Trophy Guide</h1>
-  <p class="sub">Grand Theft Auto VI · PlayStation 5 · 55 trophies: 1 platinum, 2 gold, 6 silver, 46 bronze · 28 hidden · 0 online · ~200 hours · difficulty 4/10</p>
-  <p class="judge-note"><b>To the judge:</b> 55 trophies with official names, descriptions and grades; roadmap + the one missable flagged from PowerPyx/GTABase; every guide cites its source; progress saves offline with export/import.</p>
-  <div class="progress-wrap">
-    <div class="big-progress"><span id="progress-big">0 of 55 earned</span> <small id="progress-pct"></small></div>
-    <div class="bar" role="progressbar" aria-label="Trophy progress"><i id="progress-fill" style="width:0%"></i></div>
-    <div class="grade-break" id="grade-break"></div>
+  <div>
+    <p class="kicker">Grand Theft Auto VI &middot; PlayStation 5</p>
+    <h1>Leonida Platinum</h1>
+    <p class="tagline">Every one of the 55 trophies, with a real guide for each — what to do, where in Leonida, and when it can be missed. Tick them off as you earn them.</p>
+  </div>
+  <div class="progress-card" aria-label="Progress">
+    <p class="progress-number"><span id="earnedCount">0</span><span class="of"> / 55 earned</span></p>
+    <div class="bar" role="progressbar" aria-valuemin="0" aria-valuemax="55" aria-valuenow="0" id="progressBarWrap"><div class="bar-fill" id="progressFill" style="width:0%"></div></div>
+    <p class="progress-pct" id="progressPct">0% to the platinum</p>
   </div>
 </header>
-<nav class="tabs" aria-label="Guide sections">
-  <button type="button" data-view="checklist" class="active">Checklist</button>
-  <button type="button" data-view="roadmap">Roadmap</button>
-  <button type="button" data-view="missables">Missables</button>
+
+<nav class="controls" aria-label="Filters">
+  <label class="field">Search <input id="search" type="search" placeholder="Trophy, mission, place…" autocomplete="off"></label>
+  <label class="field">Grade
+    <select id="gradeFilter">
+      <option value="all">All grades</option>
+      <option value="platinum">Platinum</option>
+      <option value="gold">Gold</option>
+      <option value="silver">Silver</option>
+      <option value="bronze">Bronze</option>
+    </select>
+  </label>
+  <label class="field">Kind
+    <select id="kindFilter">
+      <option value="all">All kinds</option>
+      <option value="story">Story</option>
+      <option value="missable">Missable</option>
+      <option value="collectible">Collectible</option>
+      <option value="activity">Activity</option>
+    </select>
+  </label>
+  <label class="field check"><input id="missableOnly" type="checkbox"> Missable only</label>
+  <label class="field check"><input id="spoilerToggle" type="checkbox" checked> Hide story spoilers</label>
+  <span class="spacer"></span>
+  <button id="exportBtn" type="button">Export progress</button>
+  <label class="import-btn">Import progress <input id="importFile" type="file" accept="application/json,.json"></label>
+  <button id="resetBtn" type="button" class="quiet">Reset</button>
 </nav>
+
+<section id="roadmap" class="roadmap" aria-label="Roadmap to the platinum">
+  <h2>Roadmap to the platinum</h2>
+  <p class="roadmap-intro">Eight steps, in order. Do the missables while the story is still open — everything else can wait for cleanup.</p>
+  <ol id="roadmapSteps" class="steps"></ol>
+  <p class="roadmap-note"><strong>Golden rule:</strong> keep a manual save before the final mission and before any big story choice. Story missions can be replayed, but a missed partner moment or a failed one-off hunt cannot be re-earned without that save.</p>
+</section>
+
 <main>
-  <section class="view active" id="view-checklist">
-    <div class="controls">
-      <input type="search" id="search" placeholder="Search a trophy or guide…" aria-label="Search trophies">
-      <label>Kind <select id="kind"><option value="all">All kinds</option><option value="story">Story</option><option value="missable">Missable</option><option value="collectible">Collectibles</option><option value="activity">Activities</option><option value="character">Character quests</option><option value="robbery">Robberies</option><option value="misc">Misc</option></select></label>
-      <label>Grade <select id="grade"><option value="all">All grades</option><option value="platinum">Platinum</option><option value="gold">Gold</option><option value="silver">Silver</option><option value="bronze">Bronze</option></select></label>
-      <label>Show <select id="earned-filter"><option value="all">All</option><option value="earned">Earned</option><option value="remaining">Not yet earned</option></select></label>
-      <label><input type="checkbox" id="show-hidden"> Show hidden names</label>
-      <label><input type="checkbox" id="spoiler"> Spoiler-safe: hide story trophies until earned</label>
-      <button type="button" id="export">Export progress</button>
-      <label class="import-label">Import progress <input id="import" type="file" accept="application/json"></label>
-    </div>
-    <div class="layout">
-      <div class="list" id="trophy-list" aria-live="polite"></div>
-      <aside class="guide-pane" id="guide-pane" aria-label="Selected trophy guide"></aside>
-    </div>
-  </section>
-  <section class="view" id="view-roadmap">
-    <div class="facts">
-      <div class="fact"><b>4 / 10</b><span>Platinum difficulty (PowerPyx)</span></div>
-      <div class="fact"><b>~200 hours</b><span>1 playthrough, 0 online trophies</span></div>
-      <div class="fact"><b>0 glitched</b><span>0 DLC trophies, no difficulty setting</span></div>
-      <div class="fact"><b>A Long Road</b><span>Hardest trophy: 100% completion</span></div>
-    </div>
-    <div class="next-up" id="next-up"></div>
-    <div id="roadmap-stages"></div>
-    <div class="warn">
-      <h2>Save strategy — no mission replay, no New Game+</h2>
-      <p>There are 15 manual save slots + 1 autosave. Save at the start and end of every chapter (10 saves), keep 5 rotating saves for free-roam cleanup, and keep one save before the final mission. Cheats disable trophies AND saving — do not use them on this playthrough. (Source: PowerPyx)</p>
-    </div>
-  </section>
-  <section class="view" id="view-missables">
-    <div class="warn">
-      <h2>⚠ The one possibly missable trophy: Positive Mental Attitude</h2>
-      <p><b>Chapter 1, Jason's home balcony.</b> After the mission “Down to Earth”, talk to Lucia in the kitchen in the morning — she says she will meditate, then goes to the balcony. Follow her and choose <b>Accept</b>. It raises your meditation counter +1, but it is not marked as a Meditation Spot like the others, and <b>it is not yet confirmed whether this meditation is required for the trophy</b> — do it anyway, and keep a Chapter 1 save. (Sources: PowerPyx, GTABase)</p>
-      <p>All 18 meditation spots across 10 locations count for the trophy; meditating together as Jason + Lucia at one spot counts +2. 100% completion only needs 15 of 18.</p>
-    </div>
-    <div class="stage">
-      <h2>No other missable trophy</h2>
-      <p>Missed optional missions, a temporarily unavailable quest giver (e.g. Kenton), a permanently lost fence and story-building magazine collections do <b>not</b> affect any trophy or 100%. Every trophy-related quest giver is available again after the story. (Source: PowerPyx)</p>
-      <p><b>One caution, not a trophy:</b> Yago's “Race Against Yago” in Chapter 3 is time-sensitive (hourglass icon) and counts toward the Strangers &amp; Freaks strand — do it as soon as it appears. Sources disagree on whether it matters for trophies, so treat it as a warning, not a certainty. (Sources: GTABase/OutputLag vs PowerPyx)</p>
-    </div>
-    <div class="stage">
-      <h2>Manual-save plan</h2>
-      <p>15 manual slots + 1 autosave. Save at the start and end of each of the 5 chapters (10 saves), rotate the other 5 for free-roam cleanup, and save once more before the final mission. No mission replay exists, so a Chapter 1 save is your only insurance for the balcony meditation. (Sources: PowerPyx, OutputLag)</p>
-    </div>
-  </section>
+  <p id="resultCount" class="result-count" aria-live="polite"></p>
+  <ul id="trophyList" class="trophy-list"></ul>
+  <p id="emptyState" class="empty" hidden>No trophies match those filters. Clear the search or pick another grade.</p>
 </main>
+
 <footer>
-  <p>Official trophy names, descriptions and grades as published for PlayStation 5 (list of 2026-11-18). Guides are written in the author's own words from PowerPyx, GTABase and PSNProfiles, cited beside each trophy. No Rockstar logo or official artwork is used. Works fully offline; progress is stored only in your browser (localStorage).</p>
-  <p>Sources: <a href="https://www.powerpyx.com/gta-6-grand-theft-auto-vi-trophy-guide-roadmap/">PowerPyx — GTA 6 Trophy Guide &amp; Roadmap</a> · <a href="https://www.gtabase.com/articles/gta-6/gta-6-achievements-trophies-list-ps5-xbox-series">GTABase — GTA 6 Trophy Guide &amp; Achievements List</a> · <a href="https://psnprofiles.com/trophies/43531-grand-theft-auto-vi">PSNProfiles — GTA VI Trophies</a> (counts 0/N)</p>
+  <p>Guide text is original, written for this guide. Trophy names, descriptions and grades are the official list. Sources are cited on every trophy: PowerPyx, PlayStationTrophies.org, PSNProfiles, TrueTrophies and Exophase. No Rockstar artwork or logos are used. Works fully offline — your checklist lives in your browser only.</p>
 </footer>
-<script type="module" src="js/main.js"></script>
+<script type="module" src="app.js"></script>
 </body>
 </html>

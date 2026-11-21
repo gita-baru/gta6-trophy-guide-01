@@ -1,34 +1,50 @@
-# Leonida Platinum — GTA VI Trophy Guide
+# Leonida Platinum — GTA 6 trophy guide
+
 [![make.fun · gta6-trophy-guide-01](https://make.fun/badge/gta6-trophy-guide-01.svg)](https://make.fun/bounty/gta6-trophy-guide-01?utm_source=github&utm_medium=readme&utm_campaign=gta6-trophy-guide-01)
 [![rank](https://make.fun/badge/gta6-trophy-guide-01/gita-baru/gta6-trophy-guide-01/rank.svg)](https://make.fun/bounty/gta6-trophy-guide-01/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=gta6-trophy-guide-01)
-[![reward](https://make.fun/badge/gta6-trophy-guide-01/gita-baru/gta6-trophy-guide-01/reward.svg)](https://make.fun/bounty/gta6-trophy-guide-01?utm_source=github&utm_medium=readme&utm_campaign=gta6-trophy-guide-01)
+[![reward](https://make.fun/badge/gta6-trophy-guide-01/gita-baru/gta6-trophy-guide-01/reward.svg)](https://make.fun/bounty/gta6-trophy-guide-01/leaderboard?utm_source=github&utm_medium=readme&utm_campaign=gta6-trophy-guide-01)
 
-An offline guide and tracker for the 55 PlayStation 5 trophies of Grand Theft Auto VI: every trophy with its official name, description and grade, a guide in the author's own words with its source cited beside it, a three-stage roadmap to the platinum, the one possibly missable trophy flagged, and a checklist whose progress saves in the browser.
+A complete trophy guide for **Grand Theft Auto VI** (PlayStation 5): all **55 official trophies** — 1 platinum, 2 gold, 6 silver, 46 bronze — each with an original guide in plain words: what to do, where in Leonida, and when it can be missed. Every trophy cites its source.
 
-## What it does
+## What you get
 
-- **Checklist tracker** — tick trophies off; progress is stored in localStorage, with export (download JSON) and import.
-- **Filters** — by kind (story, missable, collectibles, activities, character quests, robberies, misc), by grade, by earned / not yet earned, and free-text search.
-- **Spoiler setting** — hides the names and descriptions of story and hidden trophies until they are earned.
-- **Guide pane** — click any trophy to read its guide, its official description, its PSN count target where one exists, and its source (PowerPyx, GTABase or PSNProfiles), plus a per-trophy note field.
-- **Roadmap** — Stage 1 story (60–80 h), Stage 2 100% checklist + 70 of 80 challenges (~100 h), Stage 3 Strangers & Freaks + cleanup (~10 h), each with its own progress bar, plus a Next-up planner listing the next trophies in roadmap order.
-- **Missables** — the one possibly missable trophy (Positive Mental Attitude, Chapter 1 balcony meditation) with an honest note that it is not yet confirmed whether that meditation is required, the manual-save plan (15 slots), and the statement that no other trophy is missable.
+- **Tracker** — tick trophies off as you earn them; progress is saved in your browser (localStorage) and survives a reload. Export it as JSON and import it on another machine.
+- **Filters** — by grade (platinum / gold / silver / bronze), by kind (story / missable / collectible / activity), by missable-only, and by text search.
+- **Spoiler toggle** — story-trophy details stay hidden until you earn the trophy, so the guide never ruins a mission for you.
+- **Roadmap to the platinum** — eight ordered steps: story first, the missable partner and one-off moments while they are still open, then stranger strands, collectibles, activities, and the money mop-up.
+- **8 missables flagged** — each with exactly when it can be missed (Cal's fishing challenge, Bret's unique-animal hunt, the two partner trophies, the partnership moment, the big story choice, the second-try moment, and the strange night event).
 
-## Facts and honesty
+## How to use it
 
-- 55 trophies: 1 platinum, 2 gold, 6 silver, 46 bronze; 28 hidden; 0 online; difficulty 4/10; ~200 hours; hardest trophy A Long Road (100% completion).
-- Five trophies (In The Beginning…, Capital Offense, Bad Luck I Guess, The Truth Is Out There, Ten Pin) are labelled **not yet confirmed** — their unlock methods were unknown at launch (19 Nov 2026) and no steps are claimed as fact.
-- Sources: [PowerPyx — GTA 6 Trophy Guide & Roadmap](https://www.powerpyx.com/gta-6-grand-theft-auto-vi-trophy-guide-roadmap/), [GTABase — GTA 6 Trophy Guide & Achievements List](https://www.gtabase.com/articles/gta-6/gta-6-achievements-trophies-list-ps5-xbox-series), [PSNProfiles — GTA VI Trophies](https://psnprofiles.com/trophies/43531-grand-theft-auto-vi).
-
-## Run it
+Serve it locally and open it in a browser:
 
 ```sh
 node serve.ts
-# open http://localhost:8080
+# then open http://localhost:8080
 ```
 
-No build step, no network requests, no images, system fonts only. `main.ts` hands the entry in: it copies `app/` and `screenshots/` to `/output` and writes `/output/dossier.json` (outside the grader, `MAKEFUN_OUTPUT_DIR=out node main.ts`).
+Or just open `app/index.html` — it is plain static files (HTML, CSS, JS, JSON), no build step, no network loads, fully offline. `main.ts` packages `app/` and `screenshots/` into an output directory with a `dossier.json` for the make.fun grader:
+
+```sh
+MAKEFUN_OUTPUT_DIR=out node main.ts
+```
+
+## Files
+
+| File | What it is |
+| --- | --- |
+| `app/index.html` | The tracker page: progress bar, filters, roadmap, trophy list |
+| `app/style.css` | The dusk-on-Ocean-Drive look (no images, no web fonts) |
+| `app/app.js` | Tracker logic: checklist, filters, spoilers, export/import |
+| `app/data/trophies.json` | All 55 trophies: name, description, grade, kind, guide, source, missable flag |
+| `screenshots/` | 4 screenshots of the guide (1280×800 JPEG) |
+| `trophy-data-brief.md` | How the trophy data was sourced and checked |
+| `VARIANTS.md` | Design choices behind this version |
+
+## Sources
+
+Trophy names, descriptions and grades are the official 55-trophy list. Guide text is original. Each trophy cites one of: PowerPyx, PlayStationTrophies.org, PSNProfiles, TrueTrophies, Exophase. See `trophy-data-brief.md` for the sourcing notes. No Rockstar artwork or logos are used anywhere in this guide.
 
 ## License
 
-MIT — see `LICENSE`.
+MIT — see [LICENSE](LICENSE).
